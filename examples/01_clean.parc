@@ -1,0 +1,14 @@
+// Port of VulnHGNN test_01_clean.c: no bugs, every risky operation is guarded.
+fn main() {
+    let a: int = 10;
+    let b: int = 20;
+    let sum: int = a + b;
+    if (b != 0) {
+        print("Result:", sum / b);
+    }
+    let p: int[] = new int[1];
+    if (p != null) {
+        p[0] = 100;
+        print("Array value:", p[0]);
+    }
+}

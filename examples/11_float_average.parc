@@ -1,0 +1,21 @@
+// Floats: an int is promoted to float where needed, and a parallel float sum
+// gets a warning because float addition is not associative.
+fn average(values: float[], n: int) -> float {
+    if (n <= 0) {
+        return 0.0;
+    }
+    let sum: float = 0.0;
+    parallel for i in 0..n reduce(+: sum) {
+        sum = sum + values[i];
+    }
+    return sum / n;                   // n is promoted to float
+}
+
+fn main() {
+    let values: float[] = new float[4];
+    values[0] = 1.5;
+    values[1] = 2.5;
+    values[2] = 4;                    // an int stored as a float
+    values[3] = 8;
+    print("average =", average(values, 4));
+}

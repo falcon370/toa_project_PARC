@@ -1,0 +1,18 @@
+// Each iteration writes only its own element, so the loop is safe to run in
+// parallel. The second loop is serial, and the compiler notes it could be parallel.
+fn main() {
+    let n: int = 12;
+    let a: int[] = new int[n];
+    let b: int[] = new int[n];
+    parallel for i in 0..n {
+        a[i] = i * i;
+    }
+    for i in 0..n {
+        b[i] = a[i] / 2;
+    }
+    let sum: int = 0;
+    parallel for i in 0..n reduce(+: sum) {
+        sum = sum + b[i];
+    }
+    print("sum =", sum);
+}

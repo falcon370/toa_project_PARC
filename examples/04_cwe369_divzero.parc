@@ -1,0 +1,10 @@
+// Port of VulnHGNN test_04_cwe369.c: divide by zero (CWE-369).
+fn do_division(a: int, b: int) -> int {
+    return a / b;                     // no check that b is 0
+}
+
+fn main() {
+    let x: int = 10;
+    let y: int = 0;
+    print("Result:", do_division(x, y));
+}

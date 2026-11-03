@@ -1,0 +1,9 @@
+// Port of VulnHGNN test_02_cwe190.c: integer overflow (CWE-190).
+fn check_overflow(input: int) {
+    let result: int = input + 1000;   // overflows when input is near 2147483647
+    print("Result:", result);
+}
+
+fn main() {
+    check_overflow(2147483647 - 5);
+}

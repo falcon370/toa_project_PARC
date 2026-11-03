@@ -1,0 +1,11 @@
+// Port of VulnHGNN test_05_cwe476.c: null dereference (CWE-476).
+// ParC has no pointers, so the analogue is indexing an array that may be null.
+fn handle_record(id: int, record: int[]) {
+    record[0] = id;                   // no check that record is null
+    print("ID:", record[0]);
+}
+
+fn main() {
+    let record: int[] = null;
+    handle_record(1, record);
+}

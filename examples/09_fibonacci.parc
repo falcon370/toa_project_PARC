@@ -1,0 +1,25 @@
+// The same numbers two ways: a loop and a recursion.
+fn fib_loop(n: int) -> int {
+    let a: int = 0;
+    let b: int = 1;
+    let i: int = 0;
+    while (i < n) {
+        let next: int = a + b;
+        a = b;
+        b = next;
+        i = i + 1;
+    }
+    return a;
+}
+
+fn fib_rec(n: int) -> int {
+    if (n < 2) {
+        return n;
+    }
+    return fib_rec(n - 1) + fib_rec(n - 2);
+}
+
+fn main() {
+    print("loop:", fib_loop(10), fib_loop(20));
+    print("recursion:", fib_rec(10), fib_rec(20));
+}

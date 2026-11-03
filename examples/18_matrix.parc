@@ -1,0 +1,33 @@
+// A matrix stored row by row in one array: element (r, c) is at r * n + c.
+// The check on n at the top is what lets the compiler prove that n * n and
+// r * n + c stay in range.
+fn multiply(x: int[], y: int[], n: int) -> int[] {
+    if (n < 1 || n > 100) {
+        return new int[0];
+    }
+    let z: int[] = new int[n * n];
+    for r in 0..n {
+        for c in 0..n {
+            let cell: int = 0;
+            for k in 0..n {
+                cell = cell + x[r * n + k] * y[k * n + c];
+            }
+            z[r * n + c] = cell;
+        }
+    }
+    return z;
+}
+
+fn main() {
+    let n: int = 2;
+    let x: int[] = new int[4];
+    x[0] = 1;
+    x[1] = 2;
+    x[2] = 3;
+    x[3] = 4;
+    let z: int[] = multiply(x, x, n);
+    if (len(z) == 4) {
+        print(z[0], z[1]);
+        print(z[2], z[3]);
+    }
+}

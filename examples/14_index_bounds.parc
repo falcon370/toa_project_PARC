@@ -1,0 +1,8 @@
+// The loop runs to 5, but the array has 3 elements (CWE-787).
+fn main() {
+    let squares: int[] = new int[3];
+    for i in 0..5 {
+        squares[i] = i * i;           // i reaches 3: outside the array
+    }
+    print(squares[0], squares[1], squares[2]);
+}

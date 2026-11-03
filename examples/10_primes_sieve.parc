@@ -1,0 +1,24 @@
+// The sieve of Eratosthenes: a bool array and nested loops.
+fn count_primes(limit: int) -> int {
+    if (limit < 2) {
+        return 0;
+    }
+    let composite: bool[] = new bool[limit];
+    let count: int = 0;
+    for n in 2..limit {
+        if (!composite[n]) {
+            count = count + 1;
+            let multiple: int = n + n;
+            while (multiple < limit) {
+                composite[multiple] = true;
+                multiple = multiple + n;
+            }
+        }
+    }
+    return count;
+}
+
+fn main() {
+    print("primes below 100:", count_primes(100));
+    print("primes below 1000:", count_primes(1000));
+}

@@ -1,0 +1,14 @@
+// A loop that must stay serial: each iteration reads the value the previous one wrote.
+// The compiler should say which dependence blocks parallelization (a[i - 1], distance 1).
+fn shifted(a: int[], n: int) -> int {
+    for i in 1..n {
+        a[i] = a[i - 1] + 1;
+    }
+    return a[n - 1];
+}
+
+fn main() {
+    let a: int[] = new int[5];
+    a[0] = 10;
+    print("last =", shifted(a, 5));
+}

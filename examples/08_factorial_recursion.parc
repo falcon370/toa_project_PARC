@@ -1,0 +1,13 @@
+// Recursion: the call graph has a cycle, which the compiler notes.
+fn factorial(n: int) -> int {
+    if (n <= 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+fn main() {
+    for i in 1..8 {
+        print(i, "! =", factorial(i));
+    }
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ParC explorer</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="bar">
+  <h1>ParC explorer</h1>
+  <label class="example">
+    Example
+    <select id="example"></select>
+  </label>
+  <button id="compile" type="button" title="Ctrl+Enter">Compile</button>
+  <span id="status" class="status" role="status"></span>
+</header>
+
+<main class="panes">
+  <section class="pane" aria-label="Source code">
+    <div class="editor">
+      <div class="gutter" aria-hidden="true"><div id="gutter-lines"></div></div>
+      <div class="code">
+        <div class="backdrop" aria-hidden="true">
+          <div id="line-band" class="line-band" hidden></div>
+          <pre id="mark-layer"></pre>
+        </div>
+        <textarea id="source" aria-label="ParC source code" spellcheck="false" wrap="off"
+                  autocomplete="off" autocapitalize="off"></textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="pane" aria-label="Compiler output">
+    <!-- One tab per phase, in the order the compiler runs them. -->
+    <div class="tabs" role="tablist" id="tabs">
+      <button type="button" role="tab" data-tab="tokens" aria-selected="true">Tokens</button>
+      <button type="button" role="tab" data-tab="tree" aria-selected="false">Syntax tree</button>
+      <button type="button" role="tab" data-tab="symbols" aria-selected="false">Symbols</button>
+      <button type="button" role="tab" data-tab="findings" aria-selected="false">Findings <span id="finding-count" class="count" hidden></span></button>
+      <button type="button" role="tab" data-tab="ir" aria-selected="false">IR and graph</button>
+      <button type="button" role="tab" data-tab="dataflow" aria-selected="false">Data flow</button>
+      <button type="button" role="tab" data-tab="passes" aria-selected="false">Optimizer</button>
+      <button type="button" role="tab" data-tab="code" aria-selected="false">VM code</button>
+      <button type="button" role="tab" data-tab="run" aria-selected="false">Run</button>
+      <button type="button" role="tab" data-tab="metrics" aria-selected="false">Metrics</button>
+      <button type="button" role="tab" data-tab="security" aria-selected="false">Security <span id="vulnerability" class="count" hidden></span></button>
+    </div>
+    <div class="panel" role="tabpanel" id="panel-tokens"></div>
+    <div class="panel" role="tabpanel" id="panel-tree" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-symbols" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-findings" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-ir" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-dataflow" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-passes" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-code" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-run" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-metrics" hidden></div>
+    <div class="panel" role="tabpanel" id="panel-security" hidden></div>
+  </section>
+</main>
+
+<!-- Plain scripts, loaded in order; later files use what earlier ones define. -->
+<script src="/static/app.js"></script>
+<script src="/static/views.js"></script>
+<script src="/static/agent.js"></script>
+<script src="/static/run.js"></script>
+<script src="/static/security.js"></script>
+<script src="/static/metrics.js"></script>
+<script>start();</script>
+</body>
+</html>

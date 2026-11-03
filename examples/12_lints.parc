@@ -1,0 +1,17 @@
+// Quality warnings that are not bugs yet: an unused variable, a name that
+// hides another, a value that is never read, and code that can never run.
+fn describe(n: int) -> int {
+    let unused: int = 42;             // never used
+    let result: int = n;              // dead store: overwritten before it is read
+    result = 20;
+    if (n > 0) {
+        let n: int = 100;             // hides the parameter n
+        result = result + n;
+    }
+    return result;
+    print("never printed");           // unreachable
+}
+
+fn main() {
+    print(describe(1), describe(0));
+}

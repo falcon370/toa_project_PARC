@@ -1,0 +1,47 @@
+// The risky operations of examples 02 to 06, each with the check that makes
+// it safe. The compiler proves every check and reports no warning.
+fn safe_add(input: int) -> int {
+    if (input > 2147483647 - 1000) {
+        return 2147483647;
+    }
+    return input + 1000;
+}
+
+fn safe_divide(a: int, b: int) -> int {
+    if (b == 0) {
+        return 0;
+    }
+    return a / b;
+}
+
+fn first(record: int[]) -> int {
+    if (record == null) {
+        return -1;
+    }
+    if (len(record) == 0) {
+        return -1;
+    }
+    return record[0];
+}
+
+fn mean(values: int[], n: int) -> int {
+    if (n <= 0 || n > len(values)) {
+        return 0;
+    }
+    let sum: int = 0;
+    for i in 0..n {
+        sum = sum + values[i] % 1000;
+    }
+    return sum / n;
+}
+
+fn main() {
+    let values: int[] = new int[3];
+    values[0] = 10;
+    values[1] = 20;
+    values[2] = 60;
+    print(safe_add(5), safe_add(2147483647));
+    print(safe_divide(7, 2), safe_divide(7, 0));
+    print(first(values), first(null));
+    print(mean(values, 3), mean(values, 0));
+}

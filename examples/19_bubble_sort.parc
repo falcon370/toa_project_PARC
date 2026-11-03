@@ -1,0 +1,30 @@
+// Bubble sort with an early exit. Each pass reads what the pass before wrote,
+// so these loops have to stay serial.
+fn sort(a: int[]) {
+    let n: int = len(a);
+    let swapped: bool = true;
+    while (swapped) {
+        swapped = false;
+        for i in 1..n {
+            if (a[i - 1] > a[i]) {
+                let t: int = a[i];
+                a[i] = a[i - 1];
+                a[i - 1] = t;
+                swapped = true;
+            }
+        }
+        n = n - 1;
+    }
+}
+
+fn main() {
+    let a: int[] = new int[6];
+    a[0] = 31;
+    a[1] = 4;
+    a[2] = 15;
+    a[3] = 9;
+    a[4] = 26;
+    a[5] = 5;
+    sort(a);
+    print(a[0], a[1], a[2], a[3], a[4], a[5]);
+}

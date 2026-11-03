@@ -1,0 +1,16 @@
+// The example from the plan: a parallel dot product with two hidden bugs.
+fn dot(a: int[], b: int[], n: int) -> int {
+    let sum: int = 0;
+    parallel for i in 0..n reduce(+: sum) {
+        sum = sum + a[i] * b[i];      // a[i] * b[i] can overflow
+    }
+    return sum / n;                   // divides by zero when n is 0
+}
+
+fn main() {
+    let a: int[] = new int[3];
+    a[0] = 1;
+    a[1] = 2;
+    a[2] = 3;
+    print("dot =", dot(a, a, 3));
+}

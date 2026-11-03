@@ -1,0 +1,9 @@
+// Port of VulnHGNN test_03_cwe191.c: integer underflow (CWE-191).
+fn check_underflow(input: int) {
+    let result: int = input - 1000;   // underflows when input is near -2147483648
+    print("Result:", result);
+}
+
+fn main() {
+    check_underflow(-2147483647 - 1 + 5);
+}

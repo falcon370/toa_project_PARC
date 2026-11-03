@@ -1,0 +1,12 @@
+// A variable that gets a value on only one path (CWE-457).
+fn pick(flag: bool) -> int {
+    let value: int;
+    if (flag) {
+        value = 7;
+    }
+    return value;                     // no value yet when flag is false
+}
+
+fn main() {
+    print(pick(true), pick(false));
+}

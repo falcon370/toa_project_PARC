@@ -1,0 +1,26 @@
+// Work for every optimizer pass. Run "parc passes" on this file to see each
+// change and its reason; the output is the same with and without them.
+fn fill(a: int[], n: int, k: int) -> int {
+    let width: int = 4 * 2;           // constant folding: 8
+    let debug: bool = false;
+    let total: int = 0;
+    let i: int = 0;
+    while (i < n) {
+        let offset: int = k * width;  // the same on every pass: moved out of the loop
+        a[i] = i * 3 + offset;        // i * 3 becomes a running sum
+        if (debug) {                  // never true: the branch is removed
+            print("i =", i);
+        }
+        total = total + a[i];
+        i = i + 1;
+    }
+    let first: int = n * k;
+    let again: int = n * k;           // already computed: reused
+    return total + first + again + 0; // + 0 disappears
+}
+
+fn main() {
+    let a: int[] = new int[6];
+    print("result:", fill(a, 6, 2));
+    print("a[5] =", a[5]);
+}

@@ -1,0 +1,16 @@
+// Two parallel loops that are not safe. The compiler says why and runs them
+// as normal loops, so the answer is still right. To watch the race happen:
+//   parc run examples\17_parallel_race.parc --force-parallel
+fn main() {
+    let n: int = 8;
+    let a: int[] = new int[n];
+    a[0] = 1;
+    parallel for i in 1..n {
+        a[i] = a[i - 1] % 7 + i;      // needs the element the previous iteration wrote
+    }
+    let count: int = 0;
+    parallel for i in 0..n {
+        count = count + 1;            // shared by all iterations, and not a declared reduction
+    }
+    print("a[7] =", a[n - 1], "count =", count);
+}
